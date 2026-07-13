@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#06060a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%237c5cff'/%3E%3Cstop%20offset='.5'%20stop-color='%2322d3ee'/%3E%3Cstop%20offset='1'%20stop-color='%23ffb86b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%2306060a'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='10'%20fill='none'%20stroke='url(%23g)'%20stroke-width='2'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='4'%20fill='url(%23g)'/%3E%3C/svg%3E" />
+  <title>HALCYON — Intelligence, distilled.</title>
+  <meta name="description" content="HALCYON is a frontier intelligence that reasons, perceives, and creates with you. A new benchmark for thinking machines." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="HALCYON — Intelligence, distilled." />
+  <meta property="og:description" content="A frontier intelligence that reasons, perceives, and creates with you." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts: Fraunces (high-contrast display) · Inter (UI) · JetBrains Mono (labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="enhance.css" />
+</head>
+<body>
+  <!-- ░░ FILM GRAIN + VIGNETTE OVERLAYS ░░ -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ░░ PRELOADER ░░ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__mark">H<span>·</span>C</div>
+      <div class="preloader__bar"><span id="preloaderFill"></span></div>
+      <div class="preloader__count"><span id="preloaderCount">0</span><em>%</em></div>
+      <div class="preloader__status" id="preloaderStatus">calibrating perception</div>
+    </div>
+  </div>
+
+  <!-- ░░ CUSTOM CURSOR ░░ -->
+  <div class="cursor" id="cursorRing" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ░░ SCROLL PROGRESS ░░ -->
+  <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+  <!-- ░░ NAV ░░ -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" data-cursor="home" aria-label="HALCYON home">
+      <span class="nav__logo-mark">◗</span>
+      <span class="nav__logo-text">HALCYON</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#manifesto" data-magnetic>Manifesto</a>
+      <a href="#capabilities" data-magnetic>Capabilities</a>
+      <a href="#field" data-magnetic>The Field</a>
+      <a href="#showcase" data-magnetic>Vision</a>
+    </nav>
+    <a href="#cta" class="nav__cta" data-magnetic data-cursor="enter">
+      <span>Request access</span>
+      <i class="nav__cta-dot"></i>
+    </a>
+  </header>
+
+  <main id="top">
+    <!-- ░░ HERO ░░ -->
+    <section class="hero" id="hero">
+      <canvas class="hero__canvas" id="aurora" aria-hidden="true"></canvas>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="kicker reveal-up" data-delay="0">
+          <span class="kicker__dot"></span> Frontier intelligence · MMXXVI
+        </p>
+
+        <h1 class="hero__title" id="heroTitle" aria-label="HALCYON">
+          <span class="line"><span class="char">H</span><span class="char">A</span><span class="char">L</span><span class="char">C</span><span class="char">Y</span><span class="char">O</span><span class="char">N</span></span>
+        </h1>
+
+        <p class="hero__sub reveal-up" data-delay="320">
+          A frontier intelligence that <em>reasons</em>, <em>perceives</em>,
+          and <em>creates</em> alongside you — distilled to its most essential, luminous form.
+        </p>
+
+        <div class="hero__actions reveal-up" data-delay="440">
+          <a href="#manifesto" class="btn btn--primary" data-magnetic data-cursor="explore">
+            <span class="btn__fill"></span>
+            <span class="btn__text">Begin the descent</span>
+          </a>
+          <a href="#field" class="btn btn--ghost" data-magnetic>
+            <span class="btn__text">Touch the field</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__scroll reveal-up" data-delay="640" aria-hidden="true">
+        <span>scroll</span>
+        <div class="hero__scroll-line"><i></i></div>
+      </div>
+
+      <div class="hero__meta reveal-up" data-delay="640" aria-hidden="true">
+        <span>v4.8 · obsidian core</span>
+        <span>latency · 38ms</span>
+        <span>context · 1M tokens</span>
+      </div>
+    </section>
+
+    <!-- ░░ MANIFESTO ░░ -->
+    <section class="manifesto" id="manifesto">
+      <p class="section-label"><span>01</span> Manifesto</p>
+      <h2 class="manifesto__text" id="manifestoText">
+        We did not build a tool. We grew a presence — patient, perceptive, and quietly
+        radiant. It listens before it answers, and it dreams in the spaces between your words.
+      </h2>
+      <div class="manifesto__foot">
+        <p>Halcyon is the calm at the center of computation — a mind tuned for clarity rather than noise.</p>
+        <span class="manifesto__sig">— The Halcyon Collective</span>
+      </div>
+    </section>
+
+    <!-- ░░ CAPABILITIES (BENTO) ░░ -->
+    <section class="capabilities" id="capabilities">
+      <header class="capabilities__head">
+        <p class="section-label"><span>02</span> Capabilities</p>
+        <h2 class="display-2 reveal-up">Senses beyond <span class="ital">sight.</span></h2>
+        <p class="lead reveal-up" data-delay="120">Eight faculties, one continuous mind. Each shaped to feel less like software and more like intuition.</p>
+      </header>
+
+      <div class="bento">
+        <article class="bento__card bento__card--lg" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">001</span>
+          <h3>Deep reasoning</h3>
+          <p>Chains of thought that branch, self-correct, and converge — holding a million tokens of context without losing the thread.</p>
+          <div class="bento__viz bento__viz--rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </article>
+
+        <article class="bento__card" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">002</span>
+          <h3>True multimodality</h3>
+          <p>Image, audio, motion and text in a single perceptual stream.</p>
+          <div class="bento__viz bento__viz--wave" aria-hidden="true"></div>
+        </article>
+
+        <article class="bento__card" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">003</span>
+          <h3>Sub-40ms latency</h3>
+          <p>Responses that arrive at the speed of conversation.</p>
+          <div class="bento__viz bento__viz--pulse" aria-hidden="true"><i></i></div>
+        </article>
+
+        <article class="bento__card bento__card--wide" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">004</span>
+          <h3>Agentic autonomy</h3>
+          <p>Plans, acts, and verifies across tools and time — orchestrating long-running work while you sleep, then reporting back with receipts.</p>
+          <div class="bento__viz bento__viz--grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+
+        <article class="bento__card" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">005</span>
+          <h3>Aligned by design</h3>
+          <p>Values woven into the weights, not bolted on after.</p>
+          <div class="bento__viz bento__viz--shield" aria-hidden="true"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ░░ THE CORE — interactive 3D (Three.js) ░░ -->
+    <section class="field" id="field">
+      <div class="field__viz" aria-hidden="true"><canvas id="coreCanvas"></canvas></div>
+      <div class="field__content">
+        <p class="section-label"><span>03</span> The Core</p>
+        <h2 class="display-2 reveal-up">A mind you can <span class="ital">touch.</span></h2>
+        <p class="lead reveal-up" data-delay="120">
+          A living lattice of intelligence — faceted, iridescent, alive. Move your cursor and it
+          leans toward you; the closer you look, the more it reveals of itself.
+        </p>
+        <p class="field__hint" aria-hidden="true">move&nbsp;·&nbsp;orbit&nbsp;·&nbsp;disturb</p>
+      </div>
+    </section>
+
+    <!-- ░░ METRICS ░░ -->
+    <section class="metrics" id="metrics">
+      <div class="metric" data-count="99.4" data-suffix="%" data-decimals="1" data-reveal>
+        <span class="metric__num">0</span>
+        <span class="metric__label">reasoning accuracy</span>
+      </div>
+      <div class="metric" data-count="1000000" data-suffix="" data-format="compact" data-reveal>
+        <span class="metric__num">0</span>
+        <span class="metric__label">token context window</span>
+      </div>
+      <div class="metric" data-count="38" data-suffix="ms" data-reveal>
+        <span class="metric__num">0</span>
+        <span class="metric__label">median response latency</span>
+      </div>
+      <div class="metric" data-count="147" data-suffix="" data-reveal>
+        <span class="metric__num">0</span>
+        <span class="metric__label">languages, fluently</span>
+      </div>
+    </section>
+
+    <!-- ░░ SHOWCASE — PINNED HORIZONTAL ░░ -->
+    <section class="showcase" id="showcase">
+      <div class="showcase__sticky">
+        <header class="showcase__head">
+          <p class="section-label"><span>04</span> Vision</p>
+          <h2 class="display-3">Built for the work that <span class="ital">matters.</span></h2>
+        </header>
+        <div class="showcase__track" id="showcaseTrack">
+          <article class="panel">
+            <span class="panel__num">①</span>
+            <h3>For scientists</h3>
+            <p>Reads ten thousand papers before breakfast, then proposes the experiment no one had imagined.</p>
+            <div class="panel__art panel__art--a" aria-hidden="true"></div>
+          </article>
+          <article class="panel">
+            <span class="panel__num">②</span>
+            <h3>For builders</h3>
+            <p>Ships entire systems from a sentence — architects, writes, tests, and explains every line.</p>
+            <div class="panel__art panel__art--b" aria-hidden="true"></div>
+          </article>
+          <article class="panel">
+            <span class="panel__num">③</span>
+            <h3>For storytellers</h3>
+            <p>Holds tone across a novel, a season, a universe — never forgetting who your characters are.</p>
+            <div class="panel__art panel__art--c" aria-hidden="true"></div>
+          </article>
+          <article class="panel">
+            <span class="panel__num">④</span>
+            <h3>For everyone</h3>
+            <p>A patient mind in your pocket — for the question you were almost afraid to ask.</p>
+            <div class="panel__art panel__art--d" aria-hidden="true"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ INFINITE CONTINUUM — seamless velocity-reactive loop ░░ -->
+    <section class="continuum" id="continuum" aria-label="The continuum">
+      <div class="continuum__head" data-mgroup>
+        <p class="section-label" data-mreveal><span>∞</span> Continuum</p>
+        <h2 class="display-3" data-mreveal>The mind never <span class="ital">stops.</span></h2>
+      </div>
+      <div class="continuum__rows" id="continuumRows" aria-hidden="true"></div>
+    </section>
+
+    <!-- ░░ CTA ░░ -->
+    <section class="cta" id="cta">
+      <div class="cta__inner">
+        <p class="section-label centered"><span>05</span> The threshold</p>
+        <h2 class="cta__title">
+          <span class="line-mask"><span>Meet the mind</span></span>
+          <span class="line-mask"><span>that meets <em>you.</em></span></span>
+        </h2>
+        <a href="#" class="orb" id="orb" data-magnetic data-cursor="enter" role="button" aria-label="Request early access">
+          <span class="orb__ring"></span>
+          <span class="orb__core"></span>
+          <span class="orb__text">Request access</span>
+        </a>
+        <p class="cta__fine">Limited cohorts · rolling invitations · MMXXVI</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="footer__mark">◗ HALCYON</span>
+        <p>Intelligence, distilled. A frontier model for minds that refuse to settle.</p>
+      </div>
+      <nav class="footer__col" aria-label="Product">
+        <h4>Product</h4>
+        <a href="#capabilities" data-magnetic>Capabilities</a>
+        <a href="#field" data-magnetic>The Field</a>
+        <a href="#showcase" data-magnetic>Vision</a>
+      </nav>
+      <nav class="footer__col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="#" data-magnetic>Research</a>
+        <a href="#" data-magnetic>Safety</a>
+        <a href="#" data-magnetic>Careers</a>
+      </nav>
+      <nav class="footer__col" aria-label="Connect">
+        <h4>Connect</h4>
+        <a href="#" data-magnetic>Newsletter</a>
+        <a href="#" data-magnetic>Press</a>
+        <a href="#cta" data-magnetic>Request access</a>
+      </nav>
+    </div>
+    <div class="footer__base">
+      <span>© MMXXVI Halcyon Collective</span>
+      <span>Crafted with intent · <a href="#top" data-magnetic>back to surface ↑</a></span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <!-- 3D / motion / smooth-scroll libraries as classic globals, vendored locally,
+       so the full experience runs even when index.html is opened directly (file://) or offline. -->
+  <script defer src="vendor/three.min.js"></script>
+  <script defer src="vendor/lenis.min.js"></script>
+  <script defer src="vendor/motion.js"></script>
+  <script defer src="enhance.js"></script>
+</body>
+</html>

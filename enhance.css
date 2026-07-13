@@ -1,0 +1,142 @@
+/* ============================================================
+   HALCYON — Enhancement Layer styles
+   3D core section · infinite continuum · motion-revealed elements
+   ============================================================ */
+
+/* ---------- THE CORE (upgraded "Field" section) ---------- */
+.field__viz {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  will-change: transform;
+}
+#coreCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* push the copy to the left so the floating core reads center-right */
+.field .field__content { position: relative; z-index: 2; }
+.field__hint .key {
+  display: inline-block;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 0.1em 0.5em;
+  margin: 0 0.15em;
+  color: var(--ink-soft);
+  font-size: 0.92em;
+}
+
+/* readability scrim behind the text column */
+.field__content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+@media (min-width: 900px) {
+  .field__content::before {
+    inset: -8% -20% -8% -40%;
+    background: radial-gradient(70% 90% at 20% 50%, rgba(6,6,10,.72), transparent 70%);
+  }
+}
+@media (max-width: 899px) {
+  .field__content::before {
+    inset: -14% -10% -22% -10%;
+    background: radial-gradient(85% 72% at 42% 40%, rgba(6,6,10,.86), rgba(6,6,10,.45) 55%, transparent 80%);
+  }
+}
+
+/* ---------- INFINITE CONTINUUM ---------- */
+.continuum {
+  position: relative;
+  padding: clamp(5rem, 12vh, 11rem) 0;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+}
+.continuum__head {
+  padding: 0 var(--gutter);
+  max-width: 1500px;
+  margin: 0 auto clamp(2.5rem, 6vh, 4.5rem);
+}
+.continuum__rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.6vw, 1.4rem);
+  /* fade the seam at both edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.continuum__row { overflow: hidden; }
+.continuum__track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+.continuum__word {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 6vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding: 0 0.1em;
+}
+.continuum__track .continuum__word:nth-of-type(even) {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink-faint);
+}
+.continuum__sep {
+  display: inline-block;
+  width: clamp(2.4rem, 6vw, 5rem);
+  height: 6px;
+  margin: 0 clamp(0.8rem, 2vw, 1.8rem);
+  border-radius: 999px;
+  background: var(--aurora);
+  opacity: 0.85;
+  transform: translateY(-0.4em);
+}
+.continuum__track.is-chips { gap: clamp(0.6rem, 1.4vw, 1rem); }
+.continuum__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  padding: 0.7em 1.3em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  transform-origin: center;
+}
+.continuum__chip::before {
+  content: "";
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--aurora);
+  box-shadow: 0 0 10px 1px rgba(124,92,255,.7);
+}
+
+/* ---------- MOTION-REVEALED ELEMENTS ----------
+   If Motion never loads / reduced-motion: keep them visible. */
+.no-js [data-mreveal],
+.enhanced [data-mreveal] { /* JS manages these; default visible as a safety net */ }
+[data-mreveal] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  [data-mreveal] { opacity: 1 !important; transform: none !important; }
+  .continuum__track { transform: none !important; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .continuum__word { font-size: clamp(1.8rem, 9vw, 3rem); }
+}
