@@ -506,7 +506,6 @@
   function setupAnchors() {
     doc.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
-        if (window.__lenis) return; // Lenis (enhance.js) owns smooth anchor scrolling
         const id = a.getAttribute("href");
         if (id === "#" || id.length < 2) { e.preventDefault(); return; }
         const target = doc.querySelector(id);

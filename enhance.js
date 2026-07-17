@@ -1,7 +1,7 @@
 /* ============================================================
    HALCYON — Enhancement Layer  (classic script — runs on file:// too)
    Three.js interactive 3D core · Motion (Framer Motion engine) ·
-   Lenis smooth scroll · infinite seamless continuum.
+   native scroll · infinite seamless continuum.
    The libraries are loaded as classic globals (vendor/*.js) BEFORE this
    file, so everything works even when index.html is opened directly from
    disk. If any library is absent, the base site is untouched.
@@ -14,63 +14,30 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-  /* ---- shared scroll signals (work with or without Lenis) ---- */
+  /* ---- shared scroll signals (sampled from native scroll) ---- */
   const Scroll = { y: window.scrollY, vel: 0, velSmooth: 0 };
 
   /* ---------- library globals (graceful if any is missing) ---------- */
   const THREE = window.THREE || null;
-  const Lenis = (window.Lenis && (window.Lenis.default || window.Lenis)) || null;
   const motion = window.Motion || null;
   if (!THREE) console.warn('[halcyon] Three.js global missing — 3D core skipped');
-  if (!Lenis) console.warn('[halcyon] Lenis global missing — native scroll used');
   if (!motion) console.warn('[halcyon] Motion global missing — CSS reveals used');
 
 /* =========================================================
-   1) LENIS — smooth momentum scroll (disabled for reduced motion)
+   1) SCROLL — plain, native scrolling. No smooth-scroll library.
+   The wheel / trackpad behave exactly like the OS default (no momentum
+   hijacking). We only sample a lightweight velocity signal so the 3D core
+   and the continuum marquee can still react to how fast you're scrolling.
+   In-page anchor links are handled natively in app.js (setupAnchors).
 ========================================================= */
-function initLenis() {
-  if (reduce || !Lenis) {
-    // Fallback velocity tracker so the continuum still reacts to scroll.
-    let last = window.scrollY;
-    const tick = () => {
-      const y = window.scrollY;
-      Scroll.vel = y - last; last = y; Scroll.y = y;
-      requestAnimationFrame(tick);
-    };
+function initScroll() {
+  let last = window.scrollY;
+  const tick = () => {
+    const y = window.scrollY;
+    Scroll.vel = y - last; last = y; Scroll.y = y;
     requestAnimationFrame(tick);
-    return;
-  }
-  let lenis;
-  try {
-    lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo-out
-      smoothWheel: true,
-      syncTouch: false,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.4,
-    });
-  } catch (e) { console.warn('[halcyon] lenis init failed:', e.message); return; }
-
-  window.__lenis = lenis;
-  lenis.on('scroll', (e) => {
-    Scroll.y = e.scroll || window.scrollY;
-    Scroll.vel = e.velocity || 0;
-  });
-  const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
-  requestAnimationFrame(raf);
-
-  // Route in-page anchors through Lenis for buttery jumps.
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if (!id || id.length < 2) return;
-      const el = document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      lenis.scrollTo(el, { offset: -8, duration: 1.4 });
-    });
-  });
+  };
+  requestAnimationFrame(tick);
 }
 
 /* continuously smooth the velocity for organic reactions */
@@ -450,7 +417,7 @@ function initMotion() {
    BOOT
 ========================================================= */
   function boot() {
-    initLenis();
+    initScroll();
     startSignalLoop();
     initCore();
     initContinuum();

@@ -2,8 +2,8 @@
 
 A cinematic, single-page brand experience for a fictional frontier intelligence.
 An award-tier flagship site: a live WebGL aurora, an **interactive Three.js
-"intelligence core," Motion-powered choreography, Lenis smooth scrolling, and a
-genuinely infinite seamless-loop section** — with **no build step**.
+"intelligence core," Motion-powered choreography, and a genuinely infinite
+seamless-loop section** — with **no build step**.
 
 ---
 
@@ -21,10 +21,11 @@ Or serve it (nice for clean caching):
 cd halcyon && python3 -m http.server 4500   # then visit http://localhost:4500
 ```
 
-No `npm install`, no bundler, **no build step**. Three.js, Motion, and Lenis are
+No `npm install`, no bundler, **no build step**. Three.js and Motion are
 **vendored locally** in `vendor/` and loaded as ordinary `<script>` tags, so the full
-3D / motion / smooth-scroll experience works even when you open `index.html` directly
-from disk (`file://`) and even **offline**. (Only the web-fonts come from Google Fonts;
+3D / motion experience works even when you open `index.html` directly
+from disk (`file://`) and even **offline**. Scrolling is plain native scrolling —
+no smooth-scroll library. (Only the web-fonts come from Google Fonts;
 without a connection they fall back to system fonts — everything else still runs.)
 If any library is missing, the site degrades gracefully and the base experience keeps working.
 
@@ -55,7 +56,8 @@ If any library is missing, the site degrades gracefully and the base experience 
 - **Live WebGL aurora hero** — hand-written simplex-FBM domain-warp fragment shader.
 - **Motion (the Framer Motion engine, vanilla)** — spring-based reveals with
   `inView` + `stagger`, and spring hover micro-interactions.
-- **Lenis** — buttery momentum smooth-scroll, with anchor links routed through it.
+- **Native scrolling** — plain OS wheel/trackpad behavior; in-page anchor links
+  jump smoothly via the browser's own `scrollIntoView`.
 - **Infinite continuum** — three rows of seamless, looping, **scroll-velocity-reactive**
   marquees (filled/outlined kinetic type + glass capability chips) at different speeds.
 - **Kinetic variable typography** — the Fraunces wordmark's weight tracks scroll velocity.
@@ -65,7 +67,7 @@ If any library is missing, the site degrades gracefully and the base experience 
 
 ## Accessibility & performance
 
-- Fully honors `prefers-reduced-motion`: **Lenis and the infinite loop are disabled**,
+- Fully honors `prefers-reduced-motion`: **the infinite loop is disabled**,
   the 3D core renders a single static frame, and decorative motion is frozen.
 - The page always ends at the footer — the infinite section is a contained band, never
   a scroll trap.
@@ -77,7 +79,7 @@ If any library is missing, the site degrades gracefully and the base experience 
 ## Tech
 
 Vanilla **HTML5 · CSS3 · JavaScript** · **Three.js** (WebGL) ·
-**Motion** (motion.dev — the Framer Motion engine) · **Lenis** · custom GLSL · Canvas 2D.
+**Motion** (motion.dev — the Framer Motion engine) · custom GLSL · Canvas 2D.
 Libraries are vendored as classic global builds (no modules, no build step).
 Fonts: [Fraunces](https://fonts.google.com/specimen/Fraunces),
 [Inter](https://fonts.google.com/specimen/Inter),
@@ -89,8 +91,8 @@ halcyon/
 ├── styles.css    # core design system + all base styling/animation
 ├── enhance.css   # 3D core section + infinite continuum styles
 ├── app.js        # WebGL aurora, particle bento, cursor, scroll choreography
-├── enhance.js    # Three.js core · Motion · Lenis · infinite continuum
-├── vendor/       # three.min.js · lenis.min.js · motion.js (local, offline-ready)
+├── enhance.js    # Three.js core · Motion · infinite continuum
+├── vendor/       # three.min.js · motion.js (local, offline-ready)
 └── README.md
 ```
 
