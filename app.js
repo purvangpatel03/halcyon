@@ -32,8 +32,11 @@
 
   function runPreloader() {
     if (!preloader) { hero && hero.classList.add("intro"); return; }
+    // Repeat visits in the same tab skip the long count — respect the visitor's time.
+    let seen = false;
+    try { seen = sessionStorage.getItem("halcyon-seen") === "1"; } catch (e) {}
     let pct = 0;
-    const duration = prefersReduced ? 300 : 2100;
+    const duration = prefersReduced ? 300 : (seen ? 650 : 2100);
     const start = performance.now();
 
     function tick(now) {
@@ -53,6 +56,7 @@
 
     function finish() {
       preloader.classList.add("done");
+      try { sessionStorage.setItem("halcyon-seen", "1"); } catch (e) {}
       // Trigger hero entrance + reveal observers
       hero && hero.classList.add("intro");
       revealNow(hero);
@@ -113,6 +117,35 @@
       const p = h > 0 ? y / h : 0;
       progressFill.style.transform = `scaleX(${clamp(p, 0, 1)})`;
     }
+  }
+
+  /* =========================================================
+     3b) MOBILE MENU  —  full-screen overlay for small viewports
+  ========================================================= */
+  let closeMenu = null;
+
+  function setupMenu() {
+    const toggle = doc.getElementById("navToggle");
+    const menu = doc.getElementById("mobileMenu");
+    if (!toggle || !menu) return;
+
+    const setOpen = (open) => {
+      doc.body.classList.toggle("menu-open", open);
+      menu.classList.toggle("open", open);
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    closeMenu = () => setOpen(false);
+
+    toggle.addEventListener("click", () => setOpen(!doc.body.classList.contains("menu-open")));
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    doc.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && doc.body.classList.contains("menu-open")) { setOpen(false); toggle.focus(); }
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 880 && doc.body.classList.contains("menu-open")) setOpen(false);
+    });
   }
 
   /* =========================================================
@@ -216,6 +249,7 @@
   ========================================================= */
   const showcase = doc.getElementById("showcase");
   const showcaseTrack = doc.getElementById("showcaseTrack");
+  const showcaseFill = doc.getElementById("showcaseProgressFill");
   let showcaseMax = 0, showcaseScrollLen = 0;
 
   function measureShowcase() {
@@ -228,8 +262,9 @@
     }
     showcaseMax = showcaseTrack.scrollWidth - window.innerWidth;
     showcaseMax = Math.max(0, showcaseMax);
-    // total vertical scroll allotted = horizontal distance + one viewport of "hold"
-    showcaseScrollLen = showcaseMax + window.innerHeight * 0.6;
+    // total vertical scroll allotted: slightly more than the horizontal distance,
+    // so the pin feels near-1:1 with the wheel instead of sluggish
+    showcaseScrollLen = showcaseMax + window.innerHeight * 0.35;
     showcase.style.height = (window.innerHeight + showcaseScrollLen) + "px";
   }
 
@@ -239,6 +274,7 @@
     const top = -rect.top;
     const p = clamp(top / showcaseScrollLen, 0, 1);
     showcaseTrack.style.transform = `translate3d(${-(p * showcaseMax).toFixed(2)}px,0,0)`;
+    if (showcaseFill) showcaseFill.style.transform = `scaleX(${p.toFixed(4)})`;
   }
 
   /* =========================================================
@@ -510,7 +546,9 @@
         const target = doc.querySelector(id);
         if (target) {
           e.preventDefault();
+          if (closeMenu) closeMenu(); // release the scroll lock before jumping
           target.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+          try { history.pushState(null, "", id); } catch (err) { /* some file:// contexts refuse — harmless */ }
         }
       });
     });
@@ -548,6 +586,7 @@
     setupReveal();
     setupMetrics();
     setupCtaReveal();
+    setupMenu();
     setupAnchors();
     setupPointerFX();
     setupTilt();

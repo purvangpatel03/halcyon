@@ -213,6 +213,7 @@ function initCore() {
   const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0 });
   io.observe(canvas);
 
+  let baseX = 0; // rest position: pushed right on landscape so the copy column stays clear
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (w === 0 || h === 0) return;
@@ -223,6 +224,9 @@ function initCore() {
       // pull the camera back on portrait/narrow screens so the core keeps margin
       camera.position.z = aspect >= 1 ? 4.4 : 4.4 + (1 - aspect) * 3.6;
       camera.updateProjectionMatrix();
+      baseX = clamp((aspect - 1) * 1.5, 0, 1.05);
+      group.position.x = baseX;
+      glow.position.x = baseX;
     }
   }
 
@@ -267,8 +271,8 @@ function initCore() {
       glow.material.opacity = 0.45 + Math.sin(t * 1.2) * 0.1 + coreUniforms.uHover.value * 0.2;
       glow.scale.setScalar(6.2 + Math.sin(t * 0.8) * 0.4);
     }
-    // subtle parallax of the whole group toward pointer
-    group.position.x = lerp(group.position.x, pointer.x * 0.3, 0.05);
+    // subtle parallax of the whole group toward pointer, around its rest offset
+    group.position.x = lerp(group.position.x, baseX + pointer.x * 0.3, 0.05);
     group.position.y = lerp(group.position.y, pointer.y * 0.3, 0.05);
 
     renderer.render(scene, camera);

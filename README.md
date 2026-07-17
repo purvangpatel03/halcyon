@@ -1,9 +1,10 @@
 # HALCYON — *Intelligence, distilled.*
 
-A cinematic, single-page brand experience for a fictional frontier intelligence.
+A cinematic, single-page brand experience for a **fictional** frontier intelligence —
+designed and built by **Purvang Suvagiya** as a portfolio craft demo.
 An award-tier flagship site: a live WebGL aurora, an **interactive Three.js
 "intelligence core," Motion-powered choreography, and a genuinely infinite
-seamless-loop section** — with **no build step**.
+seamless-loop section** — with **no build step** and plain **native scrolling**.
 
 ---
 
@@ -35,15 +36,16 @@ If any library is missing, the site degrades gracefully and the base experience 
 
 | Section | Highlight |
 |---|---|
-| **Preloader** | Counts perception to 100% before unveiling the hero |
+| **Preloader** | Counts perception to 100% before unveiling the hero (fast-tracked on repeat visits) |
 | **Hero** | Live **WebGL** domain-warped aurora shader + char-by-char wordmark reveal |
 | **Manifesto** | Word-by-word "ignite" that resolves from blur as you scroll |
-| **Capabilities** | Bento grid with 3D tilt, cursor-tracked glow, animated visualizations |
+| **Capabilities** | Six-card bento grid with 3D tilt, cursor-tracked glow, animated visualizations |
 | **The Core** | Interactive **Three.js** glass "intelligence core" — iridescent, breathing, cursor-reactive, ringed by orbiting thought-motes |
-| **Metrics** | Count-up statistics in gradient display type |
-| **Vision** | Scroll-driven **pinned horizontal** storytelling |
+| **Metrics** | Count-up statistics in gradient display type (clearly labeled as illustrative) |
+| **Vision** | Scroll-driven **pinned horizontal** storytelling with an aurora progress bar |
 | **Continuum** | A genuinely **infinite**, seamless, velocity-reactive marquee wall |
-| **CTA** | Living aurora orb with orbiting gradient rings |
+| **The Build** | The honest maker frame — what this demo is, and what it demonstrates |
+| **CTA** | Living aurora orb — a real contact link, not a dead button |
 
 ## Craft details
 
@@ -62,6 +64,8 @@ If any library is missing, the site degrades gracefully and the base experience 
   marquees (filled/outlined kinetic type + glass capability chips) at different speeds.
 - **Kinetic variable typography** — the Fraunces wordmark's weight tracks scroll velocity.
 - **Custom morphing cursor** with magnetic targets and contextual labels.
+- **Responsive to the edge** — a full-screen animated mobile menu below 880px,
+  stacked fallbacks for the bento / showcase / footer, and touch-tuned 3D density.
 - **Design system** — obsidian base + aurora accent triad (violet → cyan → amber),
   fluid `clamp()` type scale, bespoke motion easings, film-grain + vignette atmosphere.
 

@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#06060a" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%237c5cff'/%3E%3Cstop%20offset='.5'%20stop-color='%2322d3ee'/%3E%3Cstop%20offset='1'%20stop-color='%23ffb86b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%2306060a'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='10'%20fill='none'%20stroke='url(%23g)'%20stroke-width='2'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='4'%20fill='url(%23g)'/%3E%3C/svg%3E" />
   <title>HALCYON — Intelligence, distilled.</title>
-  <meta name="description" content="HALCYON is a frontier intelligence that reasons, perceives, and creates with you. A new benchmark for thinking machines." />
+  <meta name="description" content="HALCYON is a fictional frontier-intelligence brand — a cinematic craft demo by Purvang Suvagiya, hand-built with vanilla JavaScript, WebGL shaders and Three.js. No framework, no build step." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="HALCYON — Intelligence, distilled." />
-  <meta property="og:description" content="A frontier intelligence that reasons, perceives, and creates with you." />
+  <meta property="og:description" content="A cinematic concept-brand craft demo — vanilla JS, WebGL and Three.js, no build step. By Purvang Suvagiya." />
   <meta property="og:type" content="website" />
 
   <!-- Fonts: Fraunces (high-contrast display) · Inter (UI) · JetBrains Mono (labels) -->
@@ -57,11 +57,30 @@
       <a href="#showcase" data-magnetic>Vision</a>
       <a href="#build" data-magnetic>The Build</a>
     </nav>
-    <a href="#cta" class="nav__cta" data-magnetic data-cursor="contact">
-      <span>Get in touch</span>
-      <i class="nav__cta-dot"></i>
-    </a>
+    <div class="nav__right">
+      <a href="#cta" class="nav__cta" data-magnetic data-cursor="contact">
+        <span>Get in touch</span>
+        <i class="nav__cta-dot"></i>
+      </a>
+      <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <i></i><i></i>
+      </button>
+    </div>
   </header>
+
+  <!-- ░░ MOBILE MENU ░░ -->
+  <nav class="menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a class="menu__link" href="#manifesto"><em>01</em><span>Manifesto</span></a>
+    <a class="menu__link" href="#capabilities"><em>02</em><span>Capabilities</span></a>
+    <a class="menu__link" href="#field"><em>03</em><span>The Core</span></a>
+    <a class="menu__link" href="#showcase"><em>04</em><span>Vision</span></a>
+    <a class="menu__link" href="#build"><em>05</em><span>The Build</span></a>
+    <a class="menu__link" href="#cta"><em>06</em><span>Contact</span></a>
+    <div class="menu__foot">
+      <a href="mailto:purvangsuvagiya@gmail.com?subject=Saw%20HALCYON">purvangsuvagiya@gmail.com</a>
+      <span>craft demo · Purvang Suvagiya · MMXXVI</span>
+    </div>
+  </nav>
 
   <main id="top">
     <!-- ░░ HERO ░░ -->
@@ -89,7 +108,7 @@
             <span class="btn__text">Begin the descent</span>
           </a>
           <a href="#field" class="btn btn--ghost" data-magnetic>
-            <span class="btn__text">Touch the field</span>
+            <span class="btn__text">Touch the core</span>
           </a>
         </div>
       </div>
@@ -124,7 +143,7 @@
       <header class="capabilities__head">
         <p class="section-label"><span>02</span> Capabilities</p>
         <h2 class="display-2 reveal-up">Senses beyond <span class="ital">sight.</span></h2>
-        <p class="lead reveal-up" data-delay="120">Eight faculties, one continuous mind. Each shaped to feel less like software and more like intuition.</p>
+        <p class="lead reveal-up" data-delay="120">Six faculties, one continuous mind. Each shaped to feel less like software and more like intuition.</p>
       </header>
 
       <div class="bento">
@@ -160,12 +179,20 @@
           <div class="bento__viz bento__viz--grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </article>
 
-        <article class="bento__card" data-tilt data-reveal>
+        <article class="bento__card bento__card--wide" data-tilt data-reveal>
           <div class="bento__glow"></div>
           <span class="bento__index">005</span>
           <h3>Aligned by design</h3>
-          <p>Values woven into the weights, not bolted on after.</p>
+          <p>Values woven into the weights, not bolted on after — safety that scales with capability.</p>
           <div class="bento__viz bento__viz--shield" aria-hidden="true"></div>
+        </article>
+
+        <article class="bento__card bento__card--wide" data-tilt data-reveal>
+          <div class="bento__glow"></div>
+          <span class="bento__index">006</span>
+          <h3>Creative synthesis</h3>
+          <p>Prose, code, and imagery composed in one breath — one voice, held across every medium.</p>
+          <div class="bento__viz bento__viz--venn" aria-hidden="true"><i></i><i></i><i></i></div>
         </article>
       </div>
     </section>
@@ -238,6 +265,9 @@
             <div class="panel__art panel__art--d" aria-hidden="true"></div>
           </article>
         </div>
+        <div class="showcase__foot" aria-hidden="true">
+          <div class="showcase__progress"><i id="showcaseProgressFill"></i></div>
+        </div>
       </div>
     </section>
 
@@ -287,6 +317,7 @@
             <li>A hand-written GLSL domain-warp aurora shader driving the hero.</li>
             <li>An interactive Three.js core — cursor-reactive, scroll-coupled, iridescent.</li>
             <li>Scroll choreography: reveals, pinned horizontal storytelling, count-ups, an infinite velocity-reactive marquee.</li>
+            <li>Plain native scrolling — no scroll-jacking; every effect samples the real scroll position.</li>
             <li>Kinetic variable typography that tracks scroll speed.</li>
             <li>Accessible by default — honors reduced-motion, keyboard focus, and a full no-JS fallback.</li>
             <li>Ships as static files: nothing to build, nothing to break.</li>
@@ -296,8 +327,9 @@
               <span class="btn__fill"></span>
               <span class="btn__text">Get in touch</span>
             </a>
-            <!-- TODO: when a public repo exists, add a real source link here, e.g.
-                 <a href="https://github.com/USER/REPO" class="btn btn--ghost" data-magnetic><span class="btn__text">View source</span></a> -->
+            <a href="#top" class="btn btn--ghost" data-magnetic>
+              <span class="btn__text">Replay the experience ↑</span>
+            </a>
           </div>
         </div>
       </div>
