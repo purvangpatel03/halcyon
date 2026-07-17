@@ -31,7 +31,7 @@
   ];
 
   function runPreloader() {
-    if (!preloader) { hero && hero.classList.add("intro"); doc.body.classList.remove("loading"); return; }
+    if (!preloader) { hero && hero.classList.add("intro"); return; }
     let pct = 0;
     const duration = prefersReduced ? 300 : 2100;
     const start = performance.now();
@@ -53,7 +53,6 @@
 
     function finish() {
       preloader.classList.add("done");
-      doc.body.classList.remove("loading");
       // Trigger hero entrance + reveal observers
       hero && hero.classList.add("intro");
       revealNow(hero);

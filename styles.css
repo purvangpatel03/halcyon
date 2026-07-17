@@ -77,10 +77,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Lock scroll while the preloader is up — but ONLY when JS is running,
-   so a no-JS visitor is never trapped on a frozen page. */
-html:not(.no-js) body.loading { overflow: hidden; }
-
 /* Hide native cursor only when custom cursor is active (pointer devices) */
 body.custom-cursor,
 body.custom-cursor a,
