@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="enhance.css" />
 </head>
-<body>
+<body class="loading">
   <!-- ░░ FILM GRAIN + VIGNETTE OVERLAYS ░░ -->
   <div class="grain" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
@@ -45,18 +45,20 @@
 
   <!-- ░░ NAV ░░ -->
   <header class="nav" id="nav">
-    <a class="nav__logo" href="#top" data-cursor="home" aria-label="HALCYON home">
+    <a class="nav__logo" href="#top" data-cursor="home" aria-label="HALCYON — a craft demo by Purvang Suvagiya, back to top">
       <span class="nav__logo-mark">◗</span>
       <span class="nav__logo-text">HALCYON</span>
+      <span class="nav__byline">craft demo · Purvang Suvagiya</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#manifesto" data-magnetic>Manifesto</a>
       <a href="#capabilities" data-magnetic>Capabilities</a>
-      <a href="#field" data-magnetic>The Field</a>
+      <a href="#field" data-magnetic>The Core</a>
       <a href="#showcase" data-magnetic>Vision</a>
+      <a href="#build" data-magnetic>The Build</a>
     </nav>
-    <a href="#cta" class="nav__cta" data-magnetic data-cursor="enter">
-      <span>Request access</span>
+    <a href="#cta" class="nav__cta" data-magnetic data-cursor="contact">
+      <span>Get in touch</span>
       <i class="nav__cta-dot"></i>
     </a>
   </header>
@@ -201,6 +203,7 @@
         <span class="metric__label">languages, fluently</span>
       </div>
     </section>
+    <p class="metrics__note reveal-up">Figures are illustrative — HALCYON is a fictional concept brand, built as a craft demo.</p>
 
     <!-- ░░ SHOWCASE — PINNED HORIZONTAL ░░ -->
     <section class="showcase" id="showcase">
@@ -247,20 +250,74 @@
       <div class="continuum__rows" id="continuumRows" aria-hidden="true"></div>
     </section>
 
+    <!-- ░░ THE BUILD — the honest maker frame ░░ -->
+    <section class="build" id="build">
+      <header class="build__head">
+        <p class="section-label"><span>05</span> The build</p>
+        <h2 class="display-2 reveal-up">Wait — what <span class="ital">is</span> this?</h2>
+        <p class="build__lede lead reveal-up" data-delay="120">
+          HALCYON isn't a real product. It's a fictional brand I invented as a canvas — and everything you
+          just scrolled through is the point. I built this to show one thing: that I can design and ship
+          <strong>polished, animation-heavy, interactive UI</strong>, using AI tools as a force multiplier and
+          hand-tuning every frame. <strong>No framework, no page builder, no build step</strong> — just vanilla
+          HTML, CSS and JavaScript you can open straight from disk.
+        </p>
+      </header>
+
+      <div class="build__grid">
+        <div class="build__col reveal-up">
+          <div class="build__panel">
+            <h3>Built with</h3>
+            <ul class="tags">
+              <li class="tag">Vanilla JS</li>
+              <li class="tag">WebGL + GLSL</li>
+              <li class="tag">Three.js</li>
+              <li class="tag">Motion</li>
+              <li class="tag">Lenis</li>
+              <li class="tag">Canvas 2D</li>
+              <li class="tag">CSS design system</li>
+              <li class="tag">Zero build step</li>
+            </ul>
+          </div>
+          <p class="build__by">Designed &amp; built by Purvang Suvagiya</p>
+        </div>
+
+        <div class="build__col reveal-up" data-delay="120">
+          <h3 class="build__subhead">What it demonstrates</h3>
+          <ul class="build__list">
+            <li>A hand-written GLSL domain-warp aurora shader driving the hero.</li>
+            <li>An interactive Three.js core — cursor-reactive, scroll-coupled, iridescent.</li>
+            <li>Scroll choreography: reveals, pinned horizontal storytelling, count-ups, an infinite velocity-reactive marquee.</li>
+            <li>Kinetic variable typography that tracks scroll speed.</li>
+            <li>Accessible by default — honors reduced-motion, keyboard focus, and a full no-JS fallback.</li>
+            <li>Ships as static files: nothing to build, nothing to break.</li>
+          </ul>
+          <div class="build__actions">
+            <a href="mailto:purvangsuvagiya@gmail.com?subject=Saw%20HALCYON" class="btn btn--primary" data-magnetic data-cursor="contact">
+              <span class="btn__fill"></span>
+              <span class="btn__text">Get in touch</span>
+            </a>
+            <!-- TODO: when a public repo exists, add a real source link here, e.g.
+                 <a href="https://github.com/USER/REPO" class="btn btn--ghost" data-magnetic><span class="btn__text">View source</span></a> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ░░ CTA ░░ -->
     <section class="cta" id="cta">
       <div class="cta__inner">
-        <p class="section-label centered"><span>05</span> The threshold</p>
+        <p class="section-label centered"><span>06</span> The threshold</p>
         <h2 class="cta__title">
-          <span class="line-mask"><span>Meet the mind</span></span>
-          <span class="line-mask"><span>that meets <em>you.</em></span></span>
+          <span class="line-mask"><span>Like what</span></span>
+          <span class="line-mask"><span>you <em>see?</em></span></span>
         </h2>
-        <a href="#" class="orb" id="orb" data-magnetic data-cursor="enter" role="button" aria-label="Request early access">
+        <a href="mailto:purvangsuvagiya@gmail.com?subject=Saw%20HALCYON" class="orb" id="orb" data-magnetic data-cursor="contact" aria-label="Email Purvang Suvagiya">
           <span class="orb__ring"></span>
           <span class="orb__core"></span>
-          <span class="orb__text">Request access</span>
+          <span class="orb__text">Get in touch</span>
         </a>
-        <p class="cta__fine">Limited cohorts · rolling invitations · MMXXVI</p>
+        <p class="cta__fine">Let's talk · purvangsuvagiya@gmail.com</p>
       </div>
     </section>
   </main>
@@ -270,30 +327,30 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__mark">◗ HALCYON</span>
-        <p>Intelligence, distilled. A frontier model for minds that refuse to settle.</p>
+        <p>A fictional concept brand — a craft demo built by Purvang Suvagiya to show polished, interactive UI made with AI tools.</p>
       </div>
-      <nav class="footer__col" aria-label="Product">
-        <h4>Product</h4>
+      <nav class="footer__col" aria-label="Explore the page">
+        <h4>Explore</h4>
         <a href="#capabilities" data-magnetic>Capabilities</a>
-        <a href="#field" data-magnetic>The Field</a>
+        <a href="#field" data-magnetic>The Core</a>
         <a href="#showcase" data-magnetic>Vision</a>
       </nav>
-      <nav class="footer__col" aria-label="Company">
-        <h4>Company</h4>
-        <a href="#" data-magnetic>Research</a>
-        <a href="#" data-magnetic>Safety</a>
-        <a href="#" data-magnetic>Careers</a>
+      <nav class="footer__col" aria-label="About this build">
+        <h4>About</h4>
+        <a href="#build" data-magnetic>What this is</a>
+        <a href="#build" data-magnetic>Tech &amp; craft</a>
+        <a href="#manifesto" data-magnetic>Manifesto</a>
       </nav>
-      <nav class="footer__col" aria-label="Connect">
-        <h4>Connect</h4>
-        <a href="#" data-magnetic>Newsletter</a>
-        <a href="#" data-magnetic>Press</a>
-        <a href="#cta" data-magnetic>Request access</a>
+      <nav class="footer__col" aria-label="Contact">
+        <h4>Contact</h4>
+        <a href="mailto:purvangsuvagiya@gmail.com?subject=Saw%20HALCYON" data-magnetic>Email me</a>
+        <a href="#cta" data-magnetic>Get in touch</a>
+        <a href="#top" data-magnetic>Back to top ↑</a>
       </nav>
     </div>
     <div class="footer__base">
-      <span>© MMXXVI Halcyon Collective</span>
-      <span>Crafted with intent · <a href="#top" data-magnetic>back to surface ↑</a></span>
+      <span>© MMXXVI · Concept brand &amp; craft demo by Purvang Suvagiya</span>
+      <span>Built with intent · <a href="#top" data-magnetic>back to surface ↑</a></span>
     </div>
   </footer>
 

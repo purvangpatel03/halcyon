@@ -31,7 +31,7 @@
   ];
 
   function runPreloader() {
-    if (!preloader) { hero && hero.classList.add("intro"); return; }
+    if (!preloader) { hero && hero.classList.add("intro"); doc.body.classList.remove("loading"); return; }
     let pct = 0;
     const duration = prefersReduced ? 300 : 2100;
     const start = performance.now();
@@ -153,10 +153,12 @@
       manifestoText.appendChild(doc.createTextNode(" "));
       manifestoWords.push(span);
     });
+    // Reduced motion: don't gate legibility on scroll position — reveal it all.
+    if (prefersReduced) manifestoWords.forEach((w) => w.classList.add("lit"));
   }
 
   function updateManifesto() {
-    if (!manifestoText || !manifestoWords.length) return;
+    if (!manifestoText || !manifestoWords.length || prefersReduced) return;
     const rect = manifestoText.getBoundingClientRect();
     const vh = window.innerHeight;
     // progress: 0 when block enters from bottom, 1 when scrolled to upper third
@@ -497,129 +499,9 @@
   }
 
   /* =========================================================
-     11) INTERACTIVE FIELD  —  Canvas 2D constellation w/ gravity
-  ========================================================= */
-  function setupField() {
-    const canvas = doc.getElementById("fieldCanvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let particles = [];
-    const pointer = { x: -9999, y: -9999, active: false };
-
-    function resize() {
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      buildParticles();
-    }
-
-    function buildParticles() {
-      const density = clamp(Math.floor((w * h) / 13000), 40, 150);
-      particles = [];
-      for (let i = 0; i < density; i++) {
-        particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: (Math.random() - 0.5) * 0.25,
-          r: Math.random() * 1.6 + 0.6,
-          hue: Math.random(),
-        });
-      }
-    }
-
-    const palette = ["124,92,255", "34,211,238", "255,184,107"];
-    function colorOf(p, alpha) {
-      const c = palette[Math.floor(p.hue * palette.length) % palette.length];
-      return `rgba(${c},${alpha})`;
-    }
-
-    function move(e) {
-      const r = canvas.getBoundingClientRect();
-      const cx = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-      const cy = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
-      pointer.x = cx; pointer.y = cy; pointer.active = true;
-    }
-    canvas.parentElement.addEventListener("pointermove", move, { passive: true });
-    canvas.parentElement.addEventListener("touchmove", move, { passive: true });
-    canvas.parentElement.addEventListener("pointerleave", () => { pointer.active = false; pointer.x = -9999; pointer.y = -9999; });
-
-    let visible = true;
-    const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0 });
-    io.observe(canvas);
-
-    const LINK = 130, PULL = 150;
-
-    function frame() {
-      requestAnimationFrame(frame);
-      if (!visible) return;
-      ctx.clearRect(0, 0, w, h);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-
-        // gravity toward pointer (curiosity)
-        if (pointer.active) {
-          const dx = pointer.x - p.x, dy = pointer.y - p.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < PULL && dist > 0.001) {
-            const force = (1 - dist / PULL) * 0.6;
-            p.vx += (dx / dist) * force;
-            p.vy += (dy / dist) * force;
-          }
-        }
-
-        p.vx *= 0.94; p.vy *= 0.94;
-        if (!prefersReduced) { p.x += p.vx; p.y += p.vy; }
-
-        // gentle drift baseline
-        p.x += Math.sin((p.y + i) * 0.002) * 0.08;
-
-        // wrap
-        if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
-        if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10;
-
-        // node
-        ctx.beginPath();
-        ctx.fillStyle = colorOf(p, 0.85);
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-
-        // links
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const d = dx * dx + dy * dy;
-          if (d < LINK * LINK) {
-            const a = (1 - Math.sqrt(d) / LINK) * 0.22;
-            ctx.strokeStyle = colorOf(p, a);
-            ctx.lineWidth = 0.6;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-          }
-        }
-      }
-
-      // glow at pointer
-      if (pointer.active) {
-        const g = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, PULL);
-        g.addColorStop(0, "rgba(124,92,255,0.10)");
-        g.addColorStop(1, "rgba(124,92,255,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(pointer.x, pointer.y, PULL, 0, Math.PI * 2); ctx.fill();
-      }
-    }
-
-    resize();
-    requestAnimationFrame(frame);
-    window.addEventListener("resize", debounce(resize, 200));
-  }
-
-  /* =========================================================
-     12) SMOOTH ANCHOR SCROLL (respects reduced motion)
+     11) SMOOTH ANCHOR SCROLL (respects reduced motion)
+     (The "field" section is a Three.js scene owned by enhance.js —
+      #coreCanvas — so there is no Canvas-2D fallback to wire here.)
   ========================================================= */
   function setupAnchors() {
     doc.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -672,7 +554,6 @@
     setupPointerFX();
     setupTilt();
     setupAurora();
-    setupField();
     measureShowcase();
 
     window.addEventListener("scroll", onScroll, { passive: true });
